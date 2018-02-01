@@ -1,0 +1,52 @@
+{
+  "name": "application-generator",
+  "version": "3.3.7+1",
+  "homepage": "",
+  "author": "",
+  "license": {
+    "type": "MIT"
+  },
+  "scripts": {
+    "dev": "webpack --watch & nodemon ./server/bin/www",
+    "start": "nodemon ./server/bin/www",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "babel-core": "^6.3.13",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "bootstrap": "^3.3.7",
+    "browser-sync": "^2.13.0",
+    "chai": "^4.0.0",
+    "css-loader": "^0.28.4",
+    "file-loader": "^0.11.2",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^1.13.1"
+  },
+  "plugins": [
+    "transform-class-properties"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OSP123/TravelSecure-Mongo.git"
+  },
+  "dependencies": {
+    "axios": "^0.12.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^5.0.2",
+    "morgan": "^1.8.1",
+    "nodemon": "^1.14.11",
+    "pg": "^7.4.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2"
+  },
+  "engines": {
+    "node": "7.8.0"
+  }
+}
