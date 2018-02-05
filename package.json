@@ -40,13 +40,13 @@
     "express": "^4.15.2",
     "mongoose": "^5.0.2",
     "morgan": "^1.8.1",
-    "nodemon": "^1.14.11",
+    "node": "^9.5.0",
     "pg": "^7.4.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2"
   },
   "engines": {
-    "node": "7.8.0"
+    "node": "9.5.0"
   }
 }
