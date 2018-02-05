@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
-const userSchema = mongoose.Schema({
+const storySchema = mongoose.Schema({
 
 	title: {
         type: String,
@@ -38,4 +38,4 @@ const userSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('')
+module.exports = mongoose.model('storySchema', storySchema);
