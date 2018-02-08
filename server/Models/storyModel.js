@@ -31,9 +31,9 @@ const storySchema = mongoose.Schema({
     },
     progress: {
         type: Number,
-        min: [1, "too few Characters"],
-        default: 0,
-        required: [true, "Please give the percentage"]
+        min: [1, "Too few Characters"],
+        default: 2,
+        required: false
     }
 
 });

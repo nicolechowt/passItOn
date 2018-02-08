@@ -15,14 +15,9 @@ const location2 = {
 };
 
 const locations =[location1,location2];
-console.log(locations[0]);
-
 const params = {v: '3.exp', key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'};
 var screenWidth="100%";
 var screenHeight=screen.height;
-
-console.log("screenWidth" + screenWidth);
-console.log("screenHeight" +screenHeight);
 
 
 class GoogleMap extends Component {

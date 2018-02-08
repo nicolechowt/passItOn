@@ -1,10 +1,35 @@
 import React, { Component } from "react";
+// import API from "./utils/api";
 
 class SearchBar extends Component {
 	constructor(props){
 		super(props);
-		this.state = { zipcode: "" };
+		this.state = { 
+			zipcode: "",
+			userStories: ""
+		 };
 	}
+
+	onInputChange(zipcode){
+		if (zipcode.length===5) {
+			console.log(zipcode);
+			// this.loadStory(zipcode);
+			const obj={
+				title: "help",
+				dateWanted: new Date(),
+				typeOfService: "labor",
+				content: "I am so broke.",
+				pictureURL: "www.google.com"
+			};
+			this.request(obj);
+		};
+
+		this.setState({zipcode: zipcode});
+		this.props.onSearchChange(zipcode);
+	};
+
+	request(query){
+	};
 
 	render(){
 		return (
@@ -23,17 +48,6 @@ class SearchBar extends Component {
 		);
 	}
 
-	onInputChange(zipcode){
-
-		if (zipcode.length===5) {
-			console.log(zipcode);
-			this.value = " ";
-
-		}
-
-		this.setState({zipcode});
-		this.props.onSearchChange(zipcode);
-	}
 
 }
 
