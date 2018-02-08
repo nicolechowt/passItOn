@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Nav from "./children/Nav";
 import SearchBar from "./search_bar";
 import GoogleMap from "./map";
+import TopLeaders from "./top_leaders";
 
 require("./main.css");
 
@@ -30,6 +31,7 @@ export default class Main extends Component {
 		return (
 		    <div>
 		   		<Nav />
+		   		<TopLeaders />
 				<section id="discover" className="container content-section text-center">
 		            <div className="row">
 		                <div className="col-lg-12 col-lg-offset-2">
