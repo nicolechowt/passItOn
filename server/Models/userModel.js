@@ -40,11 +40,13 @@ const userSchema = mongoose.Schema({
         default: [],
         required: false
     },
+    //location will containe an object with full address, latitude, longitude, zip code
     location: {
-        type: String,
-        min: [2, 'too few characters'],
+        type: Array,
+        default: [{fullAddress: "123 main st, los angeles, ca 91113", zipCode: 91113, latitude: null, longitude: null}],
         required: [true, 'please enter your location']
     },
+    //stories will contain the _ids of stories
     stroies: {
         type: Array,
         default: [],
@@ -53,7 +55,7 @@ const userSchema = mongoose.Schema({
     //balance will contain an object with debt, surplus, and balance (surplus - debt) points
     balance: {
         type: Array,
-        default: [],
+        default: [{debt: 3, surplus: 5, balance: 2}],
         required: false
     }
 

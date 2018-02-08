@@ -70,6 +70,9 @@ exports.addInterest = function(req, res){
 exports.request = function(req, res){
     const {title, dateWanted, typeOfService, content, pictureURL} = req.body;
 
+    //get this location from user location
+    const locaiton = req.body.location;
+
     const results = [title, dateWanted, typeOfService, content, pictureURL];
 
     const newStory = new storyModel();
@@ -78,8 +81,9 @@ exports.request = function(req, res){
     newStory.typeOfService = typeOfService;
     newStory.content = content;
     newStory.pictureURL = pictureURL;
+    newStroy.location = location;
 
-    //creating a query for saving the story id into user's profile
+    //creating a query for saving the story id into user's profile, get the email form user profile
     const profileEmail = req.body.userEmail;
     const query = {"email" : profileEmail};
 
@@ -108,6 +112,7 @@ exports.request = function(req, res){
 
 
 exports.loadStory = function(req, res){
+
     const query = {"_id" : req.body.id};
 
     storyModel.find(query,
@@ -119,6 +124,23 @@ exports.loadStory = function(req, res){
 
             res.json(docFound);
     });
+};
+
+exports.getStoryLocation = function(req, res){
+
+    const location = req.body.location[0].zipCode;
+    const query = {"locaton.zipCode" : location};
+
+    storyModel.find(query,
+        function(err, docsFound){
+            if(err){
+                console.log("Stroy by locaiton error : " + err);
+                return err;
+            }
+
+            res.json(docsFound);
+
+        })
 };
 
 exports.deleteStory = function(req, res){
@@ -156,12 +178,12 @@ exports.deleteStory = function(req, res){
 
 exports.getLeaders = function(req, res){
 
-    const location = req.body.location;
+    const location = req.body.location[0].zipCode;
 
-    const query = {"location" : location};
+    const query = {"location.zipCode" : location};
 
     userModel.find(query,
-        balance,
+        'balance email',
             function(err, docsFound){
                 if(err){
                     console.log("Leader err :" + err);
@@ -169,12 +191,13 @@ exports.getLeaders = function(req, res){
                 };
 
                 const userBalanceArr = 
-                    docsFound.map((item) => item[0].balance);
+                    docsFound.map((item) => item );
 
                 userBalanceArr.sort( function(a, b){
-                    return b - a;
+                    return b.balance[0].balance - a.balance[0].balance;
                 });
 
+                //this array contains objects with balance and email
                 res.json(userBalanceArr);
             }
     );
