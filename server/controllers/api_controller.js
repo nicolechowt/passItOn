@@ -18,6 +18,24 @@ exports.profile = function(req, res){
     });
 };
 
+exports.signup = function(req, res){
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const results = [email, password];
+
+    const newUser = new userModel();
+    newUser.email = email;
+    newUser.password = password;
+
+    newUser.save()
+        .catch( function(err) {
+            console.log("this is signUp: " + err);
+        });
+    
+    res.json(results);
+};
+
 exports.saveProfile = function(req, res){
     const {firstName, lastName, location} = req.body;
 
@@ -87,23 +105,7 @@ exports.request = function(req, res){
     });
 };
 
-exports.signup = function(req, res){
-    const email = req.body.email;
-    const password = req.body.password;
 
-    const results = [email, password];
-
-    const newUser = new userModel();
-    newUser.email = email;
-    newUser.password = password;
-
-    newUser.save()
-        .catch( function(err) {
-            console.log("this is : " + err);
-        });
-    
-    res.json(results);
-};
 
 exports.loadStory = function(req, res){
     const query = {"_id" : req.body.id};
