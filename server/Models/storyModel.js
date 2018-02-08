@@ -14,9 +14,16 @@ const storySchema = mongoose.Schema({
         type: Date,
         required: [true, "Please specify a date"]
     },
+    //we keep the lociton in story so we can eaily find them based on location
+    location: {
+        type: Array,
+        default: [{fullAddress: "123 main st, los angeles, ca 91113", zipCode: 91113, latitude: null, longitude: null}],
+        required: [true, 'please enter your location']
+    },
     typeOfService: {
         type: String,
         min: [2, "Too few Characters"],
+        default : "Other",
         required: [true, "please enter a type"]
     },
     content: {
@@ -31,8 +38,8 @@ const storySchema = mongoose.Schema({
     },
     progress: {
         type: Number,
-        min: [1, "too few Characters"],
-        default: 0,
+        min: [0, "too few Characters"],
+        default: 1,
         required: [true, "Please give the percentage"]
     }
 

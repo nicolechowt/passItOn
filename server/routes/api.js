@@ -15,6 +15,7 @@ router.post('/request', api_controller.request);
 router.post('/signup', api_controller.signup);
 
 router.get('/story', api_controller.loadStory);
+router.get('/story/location', api_controller.getStoryLocation)
 router.delete('/stroy', api_controller.deleteStory);
 
 router.get('/leaders', api_controller.getLeaders);
