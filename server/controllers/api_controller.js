@@ -1,6 +1,15 @@
 const userModel = require("../Models/userModel");
 const storyModel = require("../Models/storyModel");
 
+const NodeGeocoder = require("node-geocoder");
+
+const geoCoder_options = {
+    provider: 'google',
+    apiKey: "AIzaSyDx064NQLCKHufmPWgvdbHz9fRNjh2t038"
+};
+
+const geocoder = NodeGeocoder(geoCoder_options);
+
 exports.index = function(req,res){
     res.send("<p>I'M AN API</p>");
 };
@@ -37,18 +46,48 @@ exports.signup = function(req, res){
 };
 
 exports.saveProfile = function(req, res){
-    const {firstName, lastName, location} = req.body;
+    const {firstName, lastName, address} = req.body;
 
-    const query = {"email" : req.body.email};
+    const query = {"email" : req.body.email, "location.zipCode": {$gt: 1}};
 
-    userModel.findOneAndUpdate(query,
-        { $set : {"firstName": firstName, "lastName": lastName, "location" : location} }, function(err, docAffected){
-        if(err){
+    //empty object for location
+    const location = {
+        fullAddress: "",
+        zipCode: 0,
+        latitude: null,
+        longitude: null
+    };
+    geocoder.geocode(address)
+        .then( function(res) {
+            location.fullAddress = res[0].formattedAddress;
+            location.zipCode = res[0].zipCode;
+            location.latitude = res[0].latitude;
+            location.longitude = res[0].longitude;
+
+            userModel.findOneAndUpdate(query,
+                { $set : {
+                    "firstName": firstName,
+                    "lastName": lastName,
+                    "location.$.fullAddress" : location.fullAddress,
+                    "location.$.zipCode": location.zipCode,
+                    "location.$.latitude": location.latitude,
+                    "location.$.longitude": location.longitude }
+                },
+        
+                function(err, docAffected){
+                if(err){
+                    console.log(err);
+                    return err;
+                };
+                res.json(docAffected);
+            });
+
+        })
+        .catch( function(err){
             console.log(err);
-            return err;
-        };
-        res.json(docAffected);
-    });
+        });
+
+    
 };
 
 exports.addInterest = function(req, res){
@@ -68,45 +107,65 @@ exports.addInterest = function(req, res){
 };
 
 exports.request = function(req, res){
-    const {title, dateWanted, typeOfService, content, pictureURL} = req.body;
-
-    //get this location from user location
-    const locaiton = req.body.location;
+    const {title, dateWanted, typeOfService, content, pictureURL, address} = req.body;
 
     const results = [title, dateWanted, typeOfService, content, pictureURL];
 
-    const newStory = new storyModel();
-    newStory.title = title;
-    newStory.dateWanted = dateWanted;
-    newStory.typeOfService = typeOfService;
-    newStory.content = content;
-    newStory.pictureURL = pictureURL;
-    newStroy.location = location;
+    const location = [{
+        fullAddress: "",
+        zipCode: 0,
+        latitude: null,
+        longitude: null
+    }];
 
-    //creating a query for saving the story id into user's profile, get the email form user profile
-    const profileEmail = req.body.userEmail;
-    const query = {"email" : profileEmail};
+    geocoder.geocode(address)
+        .then( function(res) {
+            location[0].fullAddress = res[0].formattedAddress;
+            location[0].zipCode = res[0].zipCode;
+            location[0].latitude = res[0].latitude;
+            location[0].longitude = res[0].longitude;
 
-    newStory.save(
-        function(err, story){
-            if(err){
-                console.log("Story err is: " + err);
-            };
+            console.log(location[0].fullAddress);
+            console.log(title, dateWanted, typeOfService, content, pictureURL, address);
 
-            console.log(story._id);
-            //adding the story id to the array in the user profile
-            userModel.findOneAndUpdate(query,
-                { $push: {"stories" : story._id}},
-                    function(err, docAffected){
-                        if(err){
-                            console.log(err);
-                            return err;
-                        };
-                    });
+            const newStory = new storyModel();
+            console.log(newStory);
+            newStory.title = title;
+            newStory.dateWanted = dateWanted;
+            newStory.typeOfService = typeOfService;
+            newStory.content = content;
+            newStory.pictureURL = pictureURL;
+            newStory.location = location;
 
-        res.json(results);
+           
 
+            //creating a query for saving the story id into user's profile, get the email form user profile
+            const query = {"email" : req.body.userEmail};
+
+            newStory.save(
+                function(err, story){
+                    if(err){
+                        console.log("Story err is: " + err);
+                    };
+
+                    console.log(story._id);
+                    //adding the story id to the array in the user profile
+                    userModel.findOneAndUpdate(query,
+                        { $push: {"stories" : story._id}},
+                            function(err, docAffected){
+                                if(err){
+                                    console.log(err);
+                                    return err;
+                                };
+                                console.log("profile: " + docAffected);
+                            });
+
+            });
+        })
+        .catch( function(err){
+            console.log("geocoder err is: " + err);
     });
+    res.json(results);
 };
 
 
