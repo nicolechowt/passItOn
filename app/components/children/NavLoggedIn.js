@@ -22,8 +22,12 @@ export default class NavLoggedIn extends Component {
 
             <ul className="nav navbar-nav navbar-right">
               <li>
+                <Link to={"/request"} ><div className="page-scroll nav-left-text" href="/request"><span className="fa fa-send-o"></span> Submit your Story</div></Link>
+              </li>
+              <li>
                 <a href="#"><span className="fa fa-sign-out"></span> Sign out </a>
               </li>
+              
             </ul>
         </div>
 
