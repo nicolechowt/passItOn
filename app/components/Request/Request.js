@@ -1,6 +1,6 @@
 import React from "react";
 import API from "../utils/API";
-import Nav from "../children/Nav.js";
+import Nav from "../children/NavLoggedIn.js";
 import "./Request.css";
 
 class Request extends React.Component {
@@ -30,11 +30,6 @@ class Request extends React.Component {
     }
 
     handleSubmit(event){
-        // alert('here are your information: ' + this.state.title + "\n"
-        // + this.state.address + "\n"
-        // + this.state.requestDate + "\n"
-        // + this.state.typeOfService + "\n"
-        // + this.state.content);
         const query = {
             title: this.state.title,
             dateWanted: new Date(this.state.requestDate),

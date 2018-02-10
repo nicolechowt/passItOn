@@ -121,7 +121,7 @@ exports.request = function(req, res){
     geocoder.geocode(address)
         .then( function(res) {
             location[0].fullAddress = res[0].formattedAddress;
-            location[0].zipCode = res[0].zipCode;
+            location[0].zipCode = res[0].zipcode;
             location[0].latitude = res[0].latitude;
             location[0].longitude = res[0].longitude;
 
@@ -129,7 +129,6 @@ exports.request = function(req, res){
             console.log(title, dateWanted, typeOfService, content, pictureURL, address);
 
             const newStory = new storyModel();
-            console.log(newStory);
             newStory.title = title;
             newStory.dateWanted = dateWanted;
             newStory.typeOfService = typeOfService;
