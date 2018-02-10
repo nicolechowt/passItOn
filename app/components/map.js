@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from "react";
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
+import API from "./utils/API";
 
 require('./map.css');
 
@@ -13,6 +14,22 @@ const location2 = {
   lat: 34.043017,
   lng: -118.267254
 };
+
+const zipCode = "90266";
+// const query = {
+//   location: [{zipCode: zipCode}]
+// }
+
+const query = {
+  _id: "5a7e9391a9122331823cffdf"
+}
+
+// API.loadStory(query)
+//     .then(function(res){
+//       console.log(res.data);
+//     })
+//     .catch(err => console.log(err));
+
 
 const locations =[location1,location2];
 const params = {v: '3.exp', key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'};
