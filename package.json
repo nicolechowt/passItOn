@@ -45,9 +45,11 @@
     "node": "^9.5.0",
     "node-geocoder": "^3.22.0",
     "pg": "^7.4.1",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-gmaps": "^1.7.0",
+    "react-parallax": "^1.6.0",
     "react-router-dom": "^4.2.2"
   },
   "engines": {
