@@ -11,18 +11,28 @@ const location1 = {
 };
 
 const location2 = {
-  lat: 34.043017,
-  lng: -118.267254
+  lat: 33.90076,
+  lng: -118.37149959999999
 };
 
-const zipCode = "90266";
+const location3 = {
+  lat: 34.0633123,
+  lng: -118.44086199999998
+}
+
+const location4 ={
+  lat: 34.0839049,
+  lng: -118.3442521
+}
+
+// const zipCode = "90266";
 // const query = {
 //   location: [{zipCode: zipCode}]
 // }
 
-const query = {
-  _id: "5a7e9391a9122331823cffdf"
-}
+// const query = {
+//   _id: "5a7e9391a9122331823cffdf"
+// }
 
 // API.loadStory(query)
 //     .then(function(res){
@@ -31,7 +41,7 @@ const query = {
 //     .catch(err => console.log(err));
 
 
-const locations =[location1,location2];
+const locations =[location1,location2, location3, location4];
 const params = {v: '3.exp', key: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'};
 var screenWidth="100%";
 var screenHeight=screen.height;
@@ -82,6 +92,16 @@ class GoogleMap extends Component {
             lat={locations[1].lat}
             lng={locations[1].lng}
             content={'My dying son wants to meet Kobe.'}
+            onCloseClick={this.onCloseClick} />
+          <InfoWindow
+            lat={locations[2].lat}
+            lng={locations[2].lng}
+            content={'Clean 2nd St. after parade on Sunday.'}
+            onCloseClick={this.onCloseClick} />
+          <InfoWindow
+            lat={locations[3].lat}
+            lng={locations[3].lng}
+            content={'I need a beach buddy on 2/13.'}
             onCloseClick={this.onCloseClick} />
         </Gmaps>
       </div>

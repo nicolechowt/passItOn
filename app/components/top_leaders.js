@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Image from "./image";
-import API from "./utils/API";
+// import API from "./utils/API";
 
 const data = {
   "images": [
@@ -22,9 +22,9 @@ const data2 = [
 ]
 
 require("./topLeaders.css");
-const query ={
-	location: [{zipCode: 91113}]
-};
+// const query ={
+// 	location: [{zipCode: 91113}]
+// };
 
 // API.getLeaders(query)
 //     .then(function(res){
@@ -34,13 +34,13 @@ const query ={
 
 class TopLeaders extends Component {
 
-	createImage(image) {
+	createImage(image,name) {
 		return (
-			<Image source={image} key={image}/>
+			<Image source={image} key={image} name={name}/>
 		);
 	}
 
-	createImages(images,names){
+	createImages(images){
 		return (
 			<div>
 			{images.map(this.createImage)}
@@ -64,7 +64,6 @@ class TopLeaders extends Component {
 					<div className="col">
 						<h1>The Friendiest of Them All</h1>
 						{this.createImages(data.images)}
-						{this.createNames(data.names)}
 					</div>
 				</div>
 			</div>

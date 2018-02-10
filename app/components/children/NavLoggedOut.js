@@ -21,7 +21,7 @@ export default class NavLoggedOut extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <Link to={"/login"} ><div className="page-scroll nav-left-text" href="/login" data-toggle="modal"><span className="fa fa-sign-in"></span> Log in / Sign up</div></Link>
+                <Link to={"/login"} ><div className="page-scroll nav-left-text nav-link" href="/login" data-toggle="modal"><span className="fa fa-sign-in"></span> Log in / Sign up</div></Link>
               </li>
             </ul>
         </div>

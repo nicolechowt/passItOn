@@ -15,7 +15,9 @@ const Image = props => {
 
 	return(
 			<img src={source} style={style}/>
+
 	);
+				// {props.name}
 };
 
 export default Image;
