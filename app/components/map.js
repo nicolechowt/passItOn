@@ -44,7 +44,8 @@ class GoogleMap extends Component {
 
   render() {
     return (
-      <div className="map">
+      <div className="map container content-section text-center">
+        <h1>Top Stories</h1>
         <Gmaps
           onResize={this.onResize}
           width={screenWidth}

@@ -37,6 +37,8 @@ class SearchBar extends Component {
 				<div className="row">
 					<div className="col">
 						<div className="search-bar">
+						<h2>See how you can give back in your area.</h2>
+		                	<p>Type in your ZipCode to find out!</p>
 							<input
 							value={this.state.zipcode}
 							onChange={event => this.onInputChange(event.target.value)} />

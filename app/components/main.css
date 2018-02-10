@@ -1,5 +1,15 @@
+
+
+.site{
+	color: black;
+}
+
+.h1 {
+	padding: 20px;
+}
+
 .fa-map-marker{
-	font-size: 4.5em;
+	font-size: 3.5em;
 	margin: 30px;
 	display: inline-block;
 	border-radius: 100px;
@@ -8,7 +18,7 @@
 }
 
 .fa-users{
-	font-size: 4.5em;
+	font-size: 3.5em;
 	margin: 30px;
 	display: inline-block;
 	border-radius: 120px;
@@ -17,7 +27,7 @@
 }
 
 .fa-child{
-	font-size: 4.5em;
+	font-size: 3.5em;
 	margin: 30px;
 	display: inline-block;
 	border-radius: 100px;

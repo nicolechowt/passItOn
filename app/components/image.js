@@ -1,17 +1,20 @@
 import React from "react";
-import logo from '../../public/img/mainSpan.jpg';
+
+require("./image.css");
+
 
 
 const Image = props => {
-	let source = logo; //"/public/img/" + props.source;
+	let source = "/img/" + props.source;
 
 	let style ={
-		width: '300px',
-		margin: '20px 5px 20px 5px'
+		width: '150px',
+		borderRadius: 100,
+		margin: '40px',
 	};
 
 	return(
-		<img src={source} style={style}/>
+			<img src={source} style={style}/>
 	);
 };
 
