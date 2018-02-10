@@ -43,6 +43,7 @@
     "mongoose": "^5.0.2",
     "morgan": "^1.8.1",
     "node": "^9.5.0",
+    "node-geocoder": "^3.22.0",
     "pg": "^7.4.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",

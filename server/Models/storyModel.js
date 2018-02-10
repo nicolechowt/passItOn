@@ -8,10 +8,12 @@ const storySchema = mongoose.Schema({
 	title: {
         type: String,
         min: [3, 'Too few Characters'],
+        default: "title",
         required: [true, "Please enter a title"]
     },
     dateWanted: {
         type: Date,
+        default: new Date("2018-02-12"),
         required: [true, "Please specify a date"]
     },
     //we keep the lociton in story so we can eaily find them based on location
@@ -29,11 +31,13 @@ const storySchema = mongoose.Schema({
     content: {
         type: String,
         min: [10, "Too few Characters"],
+        default: "Story goes here",
         required: [true, "Please enter your story"]
     },
     pictureURL: {
         type: String,
         min: [3, "Please enter the url to the picture"],
+        default: "http://AS3",
         required: false
     },
     progress: {
