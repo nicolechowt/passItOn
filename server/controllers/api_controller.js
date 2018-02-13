@@ -15,7 +15,7 @@ exports.index = function(req,res){
 };
 
 exports.profile = function(req, res){
-    const query = {"email" : req.body.email};
+    const query = {"email" : req.params.email};
 
     userModel.find(query, function(err, docsFound){
         if(err){
@@ -169,29 +169,35 @@ exports.request = function(req, res){
 
 
 exports.loadStory = function(req, res){
+
+    const query = {"_id" : req.params.id};
+    console.log(req.params);
+
     storyModel.find(query,
-        function(err, docFound){
+        function(err, docsFound){
             if(err){
                 console.log(err);
-                return err;
             };
 
-            res.json(docFound);
+            console.log(docsFound);
+            res.json(docsFound);
     });
 };
 
 exports.getStoryLocation = function(req, res){
 
-    const location = req.body.location[0].zipCode;
-    const query = {"locaton.zipCode" : location};
+    const location = req.params.zipCode;
+    console.log(location);
+    const query = {"location.zipCode" : location};
 
     storyModel.find(query,
         function(err, docsFound){
             if(err){
-                console.log("Stroy by locaiton error : " + err);
+                console.log("Story by locaiton error : " + err);
                 return err;
             }
 
+            console.log(docsFound);
             res.json(docsFound);
 
         })
@@ -232,7 +238,8 @@ exports.deleteStory = function(req, res){
 
 exports.getLeaders = function(req, res){
 
-    const location = req.body.location[0].zipCode;
+    const location = req.params.zipCode;
+    console.log(location);
 
     const query = {"location.zipCode" : location};
 

@@ -1,7 +1,8 @@
 import React from "react";
 import API from "../utils/API";
 import Nav from "../children/NavLoggedIn.js";
-import "./Request.css";
+
+require("./Request.css");
 
 class Request extends React.Component {
     constructor(props) {
@@ -45,6 +46,7 @@ class Request extends React.Component {
                 console.log("This is what has been sent \n" + res.data);
             })
             .catch(err => console.log(err));
+        
 
         event.preventDefault();
     };
@@ -76,8 +78,8 @@ class Request extends React.Component {
                                 name="typeOfService"
                                 value={this.state.typeOfService}
                                 onChange={this.handleInputChange}
-                                className="form-control" id="typeOfService">
-                                <option selected value="Money">Money</option>
+                                className="form-control">
+                                <option value="Money">Money</option>
                                 <option value="Talking Pal">Talking Pal</option>
                                 <option value="Labor">Labor</option>
                                 <option value="Other">Other</option>
@@ -91,7 +93,7 @@ class Request extends React.Component {
                                 type="date"
                                 value={this.state.requestDate}
                                 onChange={this.handleInputChange}
-                                className="form-control" id="requestDate" defaultValue="2018-10-02" />
+                                className="form-control" />
                         </label>
                     </div>
                     <div className="form-group">
