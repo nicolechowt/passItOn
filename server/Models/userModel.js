@@ -18,6 +18,7 @@ const userSchema = mongoose.Schema({
     firstName: {
         type: String,
         min: [2, 'too few characters'],
+        default: "Jenny",
         required: [true, 'Please enter a name']
     },
     lastName: {

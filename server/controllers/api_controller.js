@@ -30,7 +30,6 @@ exports.profile = function(req, res){
 exports.signup = function(req, res){
     const email = req.body.email;
     const password = req.body.password;
-
     const results = [email, password];
 
     const newUser = new userModel();

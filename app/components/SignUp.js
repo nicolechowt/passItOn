@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import API from "./utils/API";
 
 require('./signup.css');
 
@@ -11,43 +12,18 @@ export default class Signup extends Component {
     super(props);
     this.state = {
     	value: '',
-    	username: '',
     	password: '',
     	passwordRepeat: '',
     	email: '',
     	emailRepeat: ''
     };
 
-    this.handleUsernameValidation = this.handleUsernameValidation.bind(this);
     this.handlePasswordValidation = this.handlePasswordValidation.bind(this);
     this.handlePasswordRepeat = this.handlePasswordRepeat.bind(this);
     this.handleEmailValidation = this.handleEmailValidation.bind(this);
     this.handleEmailRepeat = this.handleEmailRepeat.bind(this);
     this.signUpUser = this.signUpUser.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleUsernameValidation(event) {
-  	// username is passed in
-  	const usernameVal = this.refs.username.value,
-  				usernameForm = this.refs.usernameForm,
-  				usernameFeedback = this.refs.usernameFeedback;
-  	// username is updated in state
-  	this.setState({
-  		'username': usernameVal
-  	});
-
-    // username is checked to see if it matches certain length. If not, the screen will indicate it as such.
-    if (usernameVal.length < 6) {
-    	usernameForm.classList.remove("has-success");
-      usernameForm.classList.add("has-error");
-      usernameFeedback.textContent = "username must be at least 6 characters long";
-    } else {
-      usernameForm.classList.remove("has-error");
-
-      usernameForm.classList.add("has-success");
-      usernameFeedback.textContent = "Username valid!";
-    }
   }
 
 	handlePasswordValidation(event) {
@@ -150,18 +126,13 @@ export default class Signup extends Component {
     }
   }
 
-  signUpUser(username, email, password) {
-  	axios.post("/apis/users/signup", {
-      username: this.refs.username.value,
+  signUpUser(email, password, balance) {
+  	API.signUp({
       email: this.refs.email.value,
-      password: this.refs.password.value
+      password: this.refs.password.value,
+      balance: this.refs.password.value
     }).then(function(data) {
-      if (data.duplicateUser) {
-        // Replace with Modal
-        alert("Sorry, that username has been taken");
-      } else {
-        console.log("It works!");
-      }
+      console.log("data " + JSON.stringify(data));
     }).catch(function(err) {
       console.log(err);
     });
@@ -170,30 +141,30 @@ export default class Signup extends Component {
 	handleSubmit(event) {
 		event.preventDefault();
 
-  	const username = this.state.username;
   	const email = this.state.email;
   	const password = this.state.password;
+  	const balance = this.state.balance;
 
-		let userData = {
-      username: username,
+	let userData = {
       email: email,
-      password: password
+      password: password,
+      balance: balance
     };
 
-    if (!userData.username || !userData.email || !userData.password) {
+    if (!userData.email || !userData.password) {
       return alert("Please don't leave fields blank");
     }
 
     // If we have an email and password, run the signUpUser function
-    this.signUpUser(userData.username, userData.email, userData.password);
+    this.signUpUser(userData.email, userData.password, userData.balance);
 
     this.setState({
       value: '',
-    	username: '',
     	password: '',
     	passwordRepeat: '',
     	email: '',
-    	emailRepeat: ''
+    	emailRepeat: '',
+    	balance: ''
     });
 	}
 
@@ -206,25 +177,7 @@ export default class Signup extends Component {
 					<form onSubmit={this.handleSubmit.bind(this)}>		
 						<div className="col-md-6">
 							<h3 className="dark-grey">Registration</h3>
-							
-							<div id="username-form" ref="usernameForm" className="form-group col-lg-12">
-								<label>Username</label>
-								<input type="" name="" ref="username" className="form-control" id="username-input" value={this.state.username} onChange={this.handleUsernameValidation}/>
-								<small id="username-feedback" ref="usernameFeedback" className=""></small>
-							</div>
-							
-							<div id="password-form" className="form-group col-lg-12" ref="passwordForm">
-								<label>Password</label>
-								<input type="password" name="" ref="password" className="form-control" id="password-input" value={this.state.password} onChange={this.handlePasswordValidation} />
-								<small id="password-feedback" ref="passwordFeedback" className=""></small>
-							</div>
-							
-							<div id="repeat-password-form" className="form-group col-lg-12" ref="repeatPasswordForm">
-								<label>Repeat Password</label>
-								<input type="password" name="" ref="repeatPassword" className="form-control" id="repeat-password-input" value={this.state.passwordRepeat} onChange={this.handlePasswordRepeat} />
-								<small id="repeat-password-feedback" className="" ref="repeatPasswordFeedback"></small>
-							</div>
-											
+
 							<div id="email-form" className="form-group col-lg-12" ref="emailForm">
 								<label>Email Address</label>
 								<input type="email" name="" ref="email" className="form-control" id="email-input" value={this.state.email} onChange={this.handleEmailValidation} />
@@ -237,8 +190,26 @@ export default class Signup extends Component {
 								<label>Repeat Email Address</label>
 								<input type="email" name="" ref="emailRepeat" className="form-control" id="repeat-email-input" value={this.state.emailRepeat} onChange={this.handleEmailRepeat} />
 								<small id="email-repeat-feedback" className="" ref="emailRepeatFeedback"></small>
-							</div>			
+							</div>	
 							
+							<div id="password-form" className="form-group col-lg-12" ref="passwordForm">
+								<label>Password</label>
+								<input type="password" name="" ref="password" className="form-control" id="password-input" value={this.state.password} onChange={this.handlePasswordValidation} />
+								<small id="password-feedback" ref="passwordFeedback" className=""></small>
+							</div>
+							
+							<div id="repeat-password-form" className="form-group col-lg-12" ref="repeatPasswordForm">
+								<label>Repeat Password</label>
+								<input type="password" name="" ref="repeatPassword" className="form-control" id="repeat-password-input" value={this.state.passwordRepeat} onChange={this.handlePasswordRepeat} />
+								<small id="repeat-password-feedback" className="" ref="repeatPasswordFeedback"></small>
+							</div>		
+							
+							<div id="balance-form" ref="balanceForm" className="form-group col-lg-12">
+								<label>Balance</label>
+								<input type="" name="" ref="balance" className="form-control" id="balance-input" value={this.state.balance}/>
+								<small id="username-feedback" ref="usernameFeedback" className=""></small>
+							</div>
+
 							<div className="col-sm-6">
 								<input type="checkbox" className="checkbox" />Sigh up for our newsletter
 							</div>
