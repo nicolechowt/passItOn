@@ -30,7 +30,6 @@ exports.profile = function(req, res){
 exports.signup = function(req, res){
     const email = req.body.email;
     const password = req.body.password;
-
     const results = [email, password];
 
     const newUser = new userModel();
@@ -170,9 +169,6 @@ exports.request = function(req, res){
 
 
 exports.loadStory = function(req, res){
-
-    const query = {"_id" : req.body.id};
-
     storyModel.find(query,
         function(err, docFound){
             if(err){

@@ -40,7 +40,7 @@ export default class Main extends Component {
 	}
 
 	IsUserLogeedIn(){
-		Auth.authenticateUser("test");
+		Auth.authenticateUser("test2");
 		// const userIsAuthenticated = Auth.isUserAuthenticated();
 		// console.log("userIsAuthenticated " + userIsAuthenticated);
 		let loggedInStatus = false;

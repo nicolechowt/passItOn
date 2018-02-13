@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Image from "./image";
+import API from "./utils/API";
 
 const data = {
   "images": [
@@ -21,6 +22,15 @@ const data2 = [
 ]
 
 require("./topLeaders.css");
+const query ={
+	location: [{zipCode: 91113}]
+};
+
+// API.getLeaders(query)
+//     .then(function(res){
+//       console.log(res.data);
+//     })
+//     .catch(err => console.log(err));
 
 class TopLeaders extends Component {
 
