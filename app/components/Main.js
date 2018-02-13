@@ -9,6 +9,7 @@ import { Parallax, Background } from 'react-parallax';
 import NavLoggedIn from "./children/NavLoggedIn";
 import NavLoggedOut from "./children/NavLoggedOut";
 import Bridge from '../../public/img/bridge.jpeg';
+import Cliff from '../../public/img/cliff.jpg';
 
 require("./main.css");
 
@@ -40,7 +41,7 @@ export default class Main extends Component {
 	}
 
 	IsUserLogeedIn(){
-		Auth.authenticateUser("test2");
+		Auth.authenticateUser("test");
 		// const userIsAuthenticated = Auth.isUserAuthenticated();
 		// console.log("userIsAuthenticated " + userIsAuthenticated);
 		let loggedInStatus = false;
@@ -54,10 +55,12 @@ export default class Main extends Component {
 
 
 
-	PickProperContent(){
+	PickProperContent(search){
 		if (this.IsUserLogeedIn()){
 			return <GoogleMap />;
-		} 
+		} else {
+			return <SearchBar onSearchChange={search}/>;
+		}
 
 	}
 
@@ -98,11 +101,11 @@ export default class Main extends Component {
 					</div>
 				</Parallax>
 
-				<Parallax bgImage={Bridge}>
-			      <div style={{height: 1500}}>
+				<Parallax bgImage={Cliff}>
+			      <div style={{height: 1800}}>
 					<div style={contentStyles}>
 						{this.ShowTopLeaders()}
-						{this.PickProperContent()}
+						{this.PickProperContent(search)}
 					</div>
 			      </div>
 				</Parallax>
