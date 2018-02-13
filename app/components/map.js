@@ -6,13 +6,13 @@ import API from "./utils/API";
 require('./map.css');
 
 const location1 = {
-  lat: 34.0638989,
-  lng: -118.4485985
+  lat: 33.980289,
+  lng: -118.451745
 };
 
 const location2 = {
-  lat: 33.90076,
-  lng: -118.37149959999999
+  lat: 34.069875,
+  lng: -118.403638
 };
 
 const location3 = {
