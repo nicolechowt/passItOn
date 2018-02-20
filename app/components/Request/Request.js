@@ -56,8 +56,8 @@ class Request extends React.Component {
         <div>
             <Nav />
             <header className="header">
-                <h1>Reuest Help</h1>
-                <h4>Tell your Stroy and get Help from your community</h4>
+                <h1>Request Help</h1>
+                <h4>Tell your Story and get Help from your community</h4>
             </header>
             <section className="container">
                 <form onSubmit={this.handleSubmit}>
@@ -108,7 +108,7 @@ class Request extends React.Component {
                         </label>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="exampleFormControlTextarea1">Your Stroy:
+                        <label htmlFor="exampleFormControlTextarea1">Your Story:
                             <textarea
                             name="content"
                             value={this.state.content}

@@ -138,7 +138,7 @@ exports.request = function(req, res){
            
 
             //creating a query for saving the story id into user's profile, get the email form user profile
-            const query = {"email" : req.body.userEmail};
+            const query = {"email" : "hello@gmail.com"};
 
             newStory.save(
                 function(err, story){
@@ -146,7 +146,7 @@ exports.request = function(req, res){
                         console.log("Story err is: " + err);
                     };
 
-                    console.log(story._id);
+                    console.log("story id " + story._id);
                     //adding the story id to the array in the user profile
                     userModel.findOneAndUpdate(query,
                         { $push: {"stories" : story._id}},
@@ -227,7 +227,7 @@ exports.deleteStory = function(req, res){
                             return err;
                         };
 
-                        console.log(stroy.title);
+                        console.log(story.title);
 
                         res.json(story);
                     });
