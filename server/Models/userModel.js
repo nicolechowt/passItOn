@@ -48,7 +48,7 @@ const userSchema = mongoose.Schema({
         required: [true, 'please enter your location']
     },
     //stories will contain the _ids of stories
-    stroies: {
+    stories: {
         type: Array,
         default: [],
         required: false

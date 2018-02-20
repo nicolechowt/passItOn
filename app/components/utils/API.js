@@ -21,7 +21,7 @@ export default {
     getStoryLocation: function(query){
         return axios.get('/api/storyLocation/' + query);
     },
-    deleteStroy: function(query){
+    deleteStory: function(query){
         return axios.delete('/api/story', query);
     },
     loadStory: function(query){
