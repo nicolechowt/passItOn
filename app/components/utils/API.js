@@ -10,7 +10,7 @@ export default {
         return axios.post('/api/profile', query);
     },
     addInterest: function(query){
-        return axios.post('/userInterest', query);
+        return axios.post('/api/userInterest', query);
     },
     request: function(query){
         return axios.post('/api/request', query);
@@ -29,5 +29,8 @@ export default {
     },
     getLeaders: function(query){
         return axios.get('/api/leaders/' + query);
+    },
+    savePicture: function(query){
+        return axios.post('/api/profile/picture/', query);
     }
 }

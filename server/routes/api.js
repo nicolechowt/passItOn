@@ -6,7 +6,8 @@ const api_controller = require('../controllers/api_controller');
 router.get('/', api_controller.index);
 
 router.get('/profile/:email?', api_controller.profile);
-router.post('profile', api_controller.saveProfile);
+router.post('/profile', api_controller.saveProfile);
+router.post('/profile/picture', api_controller.savePicture);
 // router.post('/logIn', api_controller.logIn);
 
 router.post('/userInterest', api_controller.addInterest);
