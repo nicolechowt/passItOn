@@ -89,6 +89,22 @@ exports.saveProfile = function(req, res){
     
 };
 
+exports.savePicture = function(req, res){
+    const query = {"email": req.body.email};
+    const profilePictureURL = req.body.profilePictureURL;
+
+    userModel.findOneAndUpdate(query,
+        { $set : {
+            "profilePictureURL": profilePictureURL}
+        }, function(err, docAffected){
+            if(err){
+                console.log("picture err :" + err);
+                return err;
+            };
+            res.json(docAffected);
+        });
+};
+
 exports.addInterest = function(req, res){
     const interest = req.body.interest;
 
